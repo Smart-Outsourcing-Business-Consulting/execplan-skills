@@ -1,10 +1,8 @@
 # ExecPlan Harness Skills
 
-This is a local fork of `mattpocock/skills` adapted for the Codex ExecPlan
-harness defined by:
-
-- `/home/smartobc_stephen/.codex/AGENTS.md`
-- `/home/smartobc_stephen/.codex/PLANS.md`
+This is a fork of `mattpocock/skills` adapted for a Codex ExecPlan harness.
+The harness contract is summarized here so the repository is portable across
+developer machines and teams.
 
 For repositories that use this harness,
 `docs/execplans/<plan-name>/EXECPLAN.md` is the accepted executable
@@ -33,8 +31,10 @@ Install and use only these ExecPlan-aware engineering skills for the harness:
 
 ## Install Policy
 
-Global Codex installs should copy only the `execplan-*` skills from
-`skills/engineering/` into `~/.codex/skills`.
+Codex installs should copy only the `execplan-*` skills from
+`skills/engineering/` into the developer's Codex skills directory. When
+`CODEX_HOME` is set, that usually means `$CODEX_HOME/skills`; otherwise it is
+commonly `$HOME/.codex/skills`.
 
 The original upstream engineering skills may remain in this fork as reference
 material, but they are not part of the active global harness and should not be
