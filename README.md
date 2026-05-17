@@ -20,13 +20,9 @@ implementation-relevant consequence from those documents must be summarized in
 
 ## Supported Agent
 
-Codex is the only supported agent today. Claude compatibility metadata may exist
-so the repository can become multi-agent later, but the supported install and
-runtime path is Codex.
+Codex is the supported agent for this repository.
 
 ## Skills
-
-### ExecPlan Harness
 
 - [`execplan-grill-with-docs`](./skills/engineering/execplan-grill-with-docs/SKILL.md)
 - [`execplan-diagnose`](./skills/engineering/execplan-diagnose/SKILL.md)
@@ -35,19 +31,6 @@ runtime path is Codex.
 - [`execplan-triage`](./skills/engineering/execplan-triage/SKILL.md)
 - [`execplan-tdd`](./skills/engineering/execplan-tdd/SKILL.md)
 - [`execplan-zoom-out`](./skills/engineering/execplan-zoom-out/SKILL.md)
-
-### General Engineering
-
-- [`diagnose`](./skills/engineering/diagnose/SKILL.md)
-- [`grill-with-docs`](./skills/engineering/grill-with-docs/SKILL.md)
-- [`improve-codebase-architecture`](./skills/engineering/improve-codebase-architecture/SKILL.md)
-- [`prototype`](./skills/engineering/prototype/SKILL.md)
-- [`setup-engineering-skills`](./skills/engineering/setup-engineering-skills/SKILL.md)
-- [`tdd`](./skills/engineering/tdd/SKILL.md)
-- [`to-issues`](./skills/engineering/to-issues/SKILL.md)
-- [`to-prd`](./skills/engineering/to-prd/SKILL.md)
-- [`triage`](./skills/engineering/triage/SKILL.md)
-- [`zoom-out`](./skills/engineering/zoom-out/SKILL.md)
 
 ## Installation
 
@@ -70,22 +53,6 @@ Restart Codex after installing or updating skills.
 
 Manual fallback: copy the desired directories from `skills/engineering/` into
 `${CODEX_HOME:-$HOME/.codex}/skills`.
-
-## Roadmap
-
-- A Codex plugin for this skill bundle is in the works
-  ([#1](https://github.com/Smart-Outsourcing-Business-Consulting/execplan-skills/issues/1)).
-  It should follow the current OpenAI Codex plugin conventions documented in
-  <https://developers.openai.com/codex/plugins/build>, package the existing
-  `skills/engineering/` skills without duplicating their source, and keep Codex
-  as the only supported runtime until multi-agent support is explicitly added.
-
-- Claude compatibility is a likely future direction
-  ([#2](https://github.com/Smart-Outsourcing-Business-Consulting/execplan-skills/issues/2)),
-  but it is not part of the current supported workflow. When that work happens,
-  the repository should define which skills are shared across agents, how
-  Claude-specific install metadata is kept in sync, and whether any behavior
-  differs between Codex and Claude.
 
 ## Lifecycle Fit
 
