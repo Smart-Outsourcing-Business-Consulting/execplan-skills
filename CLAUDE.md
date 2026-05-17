@@ -1,14 +1,14 @@
-Skills are organized into bucket folders under `skills/`:
+Skills live under `skills/engineering/`.
 
-- `engineering/` — daily code work
-- `productivity/` — daily non-code workflow tools
-- `misc/` — kept around but rarely used
-- `personal/` — tied to my own setup, not promoted
-- `in-progress/` — drafts not yet ready to ship
-- `deprecated/` — no longer used
+Do not add non-engineering skill buckets such as `productivity/`, `misc/`,
+`personal/`, `in-progress/`, or `deprecated/`. This repository is scoped to
+skills for AI-assisted software engineering.
 
-Every skill in `engineering/`, `productivity/`, or `misc/` must have a reference in the top-level `README.md` and an entry in `.claude-plugin/plugin.json`. Skills in `personal/`, `in-progress/`, and `deprecated/` must not appear in either.
+Every skill in `skills/engineering/` must have a reference in the top-level
+`README.md`, a reference in `skills/engineering/README.md`, and an entry in
+`.claude-plugin/plugin.json`.
 
-Each skill entry in the top-level `README.md` must link the skill name to its `SKILL.md`.
+Each skill entry must link the skill name to its `SKILL.md`.
 
-Each bucket folder has a `README.md` that lists every skill in the bucket with a one-line description, with the skill name linked to its `SKILL.md`.
+Codex is the only supported agent for now. Claude compatibility metadata may be
+kept in sync, but Claude runtime behavior is not currently supported.

@@ -14,15 +14,15 @@ Do not create a separate agent brief as an implementation contract.
 When work is ready for an agent, capture the accepted executable specification
 in `docs/execplans/<plan-name>/EXECPLAN.md`.
 
-Issue bodies, comments, chat history, `.out-of-scope/`, `CONTEXT.md`, ADRs,
-and discovery notes are planning inputs, not hidden implementation scope.
+Issue bodies, comments, chat history, `CONTEXT.md`, ADRs, and discovery notes
+are planning inputs, not hidden implementation scope.
 
 ## Required Reads
 
 - Always read repo-local instructions and the applicable `PLANS.md` if the
   request may enter the ExecPlan workflow.
-- Read relevant `CONTEXT.md`, `docs/adr/*`, `doc/discovery/*`, and
-  `.out-of-scope/*` only enough to classify the request.
+- Read relevant `CONTEXT.md`, `docs/adr/*`, and `doc/discovery/*` only enough
+  to classify the request.
 - Inspect code only enough to classify confidently.
 - Read an existing `EXECPLAN.md` when the request references one.
 
@@ -76,10 +76,11 @@ When triage reaches `ready-for-execplan`, identify the plan path and the
 minimum accepted scope to author. Do not invent detailed implementation steps
 unless the user asked you to author the ExecPlan.
 
-## Out Of Scope Memory
+## Out Of Scope
 
-Use `.out-of-scope/` only for durable rejected enhancement concepts. Do not use
-it for temporary deferrals or bugs.
+Use `out-of-scope` as a classification outcome when the requested work should
+not proceed. Do not create a durable rejection record unless the target
+repository already defines one and the user asks you to update it.
 
 If an out-of-scope decision affects future implementation, summarize the
 implementation-relevant consequence in `EXECPLAN.md` when that task arises.

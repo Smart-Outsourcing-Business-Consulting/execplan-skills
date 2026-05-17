@@ -14,6 +14,15 @@ source of truth.
 - **[execplan-tdd](./execplan-tdd/SKILL.md)** — Vertical red-green-refactor slices governed by `EXECPLAN.md` and permissioned verification.
 - **[execplan-zoom-out](./execplan-zoom-out/SKILL.md)** — Codebase mapping for authoring, handoff, and implementation orientation without creating hidden scope.
 
-The original upstream engineering skills are kept only as source-reference
-material in this fork. They are not the active harness skills and should not be
-installed globally for this workflow.
+## General Engineering Skills
+
+- **[diagnose](./diagnose/SKILL.md)** — Disciplined diagnosis loop for hard bugs and performance regressions.
+- **[grill-with-docs](./grill-with-docs/SKILL.md)** — Grilling workflow that challenges plans against domain language and durable docs.
+- **[improve-codebase-architecture](./improve-codebase-architecture/SKILL.md)** — Architecture review for coupling, boundaries, testability, and AI navigability.
+- **[prototype](./prototype/SKILL.md)** — Throwaway prototyping for state, data, logic, and UI questions.
+- **[setup-engineering-skills](./setup-engineering-skills/SKILL.md)** — Per-repo setup for issue tracker, triage labels, and domain documentation.
+- **[tdd](./tdd/SKILL.md)** — Test-driven development with a red-green-refactor loop.
+- **[to-issues](./to-issues/SKILL.md)** — Break plans and PRDs into independently grabbable issue slices.
+- **[to-prd](./to-prd/SKILL.md)** — Turn current context into a PRD and publish it to the issue tracker.
+- **[triage](./triage/SKILL.md)** — Triage issues through category and state roles.
+- **[zoom-out](./zoom-out/SKILL.md)** — Map unfamiliar code areas and explain how they fit into the larger system.
