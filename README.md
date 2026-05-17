@@ -38,6 +38,11 @@ Codex is the supported agent for this repository.
 Prefer the `skills` CLI because it handles the Codex global destination and can
 install from GitHub-hosted skill repositories.
 
+For Codex, keep the installed ExecPlan skill copies in `$HOME/.agents/skills`.
+Do not also keep duplicate `execplan-*` copies under
+`${CODEX_HOME:-$HOME/.codex}/skills`, because Codex can load both roots and show
+the same skills twice.
+
 From GitHub:
 
 ```bash
@@ -50,14 +55,17 @@ From a local checkout:
 npx skills@latest add . --global --agent codex
 ```
 
-Restart Codex after installing or updating skills.
+Restart Codex after installing or updating skills so the active skill inventory
+is reloaded.
 
 Manual fallback: copy the desired directories from `skills/engineering/` into
-`${CODEX_HOME:-$HOME/.codex}/skills`.
+`$HOME/.agents/skills`, replacing the old installed copies.
 
 ## Updating Installed Skills
 
-When this GitHub repository changes, reinstall the skills and restart Codex.
+When this repository changes, update the installed copies and restart Codex.
+This repository is the source of truth; installed skill directories are runtime
+copies.
 
 If you installed from GitHub, rerun:
 
@@ -72,9 +80,15 @@ git pull --ff-only
 npx skills@latest add . --global --agent codex
 ```
 
+If `npx skills@latest add` refuses to replace existing installed directories,
+remove the old `execplan-*` directories from `$HOME/.agents/skills` first, then
+rerun the command.
+
 If you installed manually, copy the updated `execplan-*` directories from
-`skills/engineering/` into `${CODEX_HOME:-$HOME/.codex}/skills`, replacing the
-old copies.
+`skills/engineering/` into `$HOME/.agents/skills`, replacing the old copies.
+
+After any update path, make sure duplicate ExecPlan copies do not exist under
+`${CODEX_HOME:-$HOME/.codex}/skills`, then restart Codex.
 
 ## Lifecycle Fit
 
