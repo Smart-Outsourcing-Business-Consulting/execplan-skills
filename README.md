@@ -24,6 +24,7 @@ Codex is the supported agent for this repository.
 
 ## Skills
 
+- [`handoff`](./skills/engineering/handoff/SKILL.md)
 - [`execplan-adopt-repo`](./skills/engineering/execplan-adopt-repo/SKILL.md)
 - [`execplan-grill-with-docs`](./skills/engineering/execplan-grill-with-docs/SKILL.md)
 - [`execplan-diagnose`](./skills/engineering/execplan-diagnose/SKILL.md)
@@ -98,6 +99,10 @@ After any update path, make sure duplicate ExecPlan copies do not exist under
   ExecPlan is accepted and unblocked.
 - Implementation changes code only within accepted ExecPlan scope and updates
   `progress.md`, `decision-log.md`, and `discoveries-retrospective.md`.
+
+The `handoff` skill is separate from ExecPlan lifecycle handoff preparation:
+it writes temporary `/tmp/codex-handoffs/` conversation handoffs for
+context-limit, pause, or later-continuation cases.
 
 If durable docs, repository state, or implementation discoveries contradict or
 expand the accepted ExecPlan, the agent must stop and report drift instead of
