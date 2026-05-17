@@ -9,6 +9,7 @@ truth.
 The standalone `handoff` skill is for temporary conversation continuity; it
 does not replace ExecPlan lifecycle files.
 
+- **[ascii-visual-modeling](./ascii-visual-modeling/SKILL.md)** - Terminal-friendly ASCII diagrams for difficult engineering explanations, specs, diagnosis notes, handoffs, state machines, ownership boundaries, and control/data flow.
 - **[handoff](./handoff/SKILL.md)** — Temporary conversation handoff for context-limit, pause, or later-continuation cases, with ExecPlan-aware artifact references and `/tmp/codex-handoffs/` storage.
 - **[execplan-adopt-repo](./execplan-adopt-repo/SKILL.md)** — Repository setup/adoption for `AGENTS.md`, optional durable memory, and ExecPlan folder conventions without old issue-tracker setup.
 - **[execplan-grill-with-docs](./execplan-grill-with-docs/SKILL.md)** — ExecPlan-aware grilling for clarifying business intent, domain language, edge cases, and durable decisions while keeping `EXECPLAN.md` as the implementation contract.

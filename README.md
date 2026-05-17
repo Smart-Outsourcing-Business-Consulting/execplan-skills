@@ -24,6 +24,7 @@ Codex is the supported agent for this repository.
 
 ## Skills
 
+- [`ascii-visual-modeling`](./skills/engineering/ascii-visual-modeling/SKILL.md)
 - [`handoff`](./skills/engineering/handoff/SKILL.md)
 - [`execplan-adopt-repo`](./skills/engineering/execplan-adopt-repo/SKILL.md)
 - [`execplan-grill-with-docs`](./skills/engineering/execplan-grill-with-docs/SKILL.md)
