@@ -24,6 +24,7 @@ Codex is the supported agent for this repository.
 
 ## Skills
 
+- [`execplan-adopt-repo`](./skills/engineering/execplan-adopt-repo/SKILL.md)
 - [`execplan-grill-with-docs`](./skills/engineering/execplan-grill-with-docs/SKILL.md)
 - [`execplan-diagnose`](./skills/engineering/execplan-diagnose/SKILL.md)
 - [`execplan-prototype`](./skills/engineering/execplan-prototype/SKILL.md)
