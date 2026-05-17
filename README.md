@@ -25,8 +25,8 @@ Codex is the supported agent for this repository.
 ## Skills
 
 - [`ascii-visual-modeling`](./skills/engineering/ascii-visual-modeling/SKILL.md)
-- [`handoff`](./skills/engineering/handoff/SKILL.md)
 - [`execplan-adopt-repo`](./skills/engineering/execplan-adopt-repo/SKILL.md)
+- [`execplan-handoff`](./skills/engineering/execplan-handoff/SKILL.md)
 - [`execplan-grill-with-docs`](./skills/engineering/execplan-grill-with-docs/SKILL.md)
 - [`execplan-diagnose`](./skills/engineering/execplan-diagnose/SKILL.md)
 - [`execplan-prototype`](./skills/engineering/execplan-prototype/SKILL.md)
@@ -83,8 +83,8 @@ npx skills@latest add . --global --agent codex
 ```
 
 If `npx skills@latest add` refuses to replace existing installed directories,
-remove the old `execplan-*` directories from `$HOME/.agents/skills` first, then
-rerun the command.
+remove the old `handoff` directory and outdated `execplan-*` directories from
+`$HOME/.agents/skills` first, then rerun the command.
 
 If you installed manually, copy the updated `execplan-*` directories from
 `skills/engineering/` into `$HOME/.agents/skills`, replacing the old copies.
@@ -101,9 +101,9 @@ After any update path, make sure duplicate ExecPlan copies do not exist under
 - Implementation changes code only within accepted ExecPlan scope and updates
   `progress.md`, `decision-log.md`, and `discoveries-retrospective.md`.
 
-The `handoff` skill is separate from ExecPlan lifecycle handoff preparation:
-it writes temporary `/tmp/codex-handoffs/` conversation handoffs for
-context-limit, pause, or later-continuation cases.
+The `execplan-handoff` skill is separate from ExecPlan lifecycle handoff
+preparation: it writes temporary `/tmp/codex-handoffs/` conversation handoffs
+for context-limit, pause, or later-continuation cases.
 
 If durable docs, repository state, or implementation discoveries contradict or
 expand the accepted ExecPlan, the agent must stop and report drift instead of

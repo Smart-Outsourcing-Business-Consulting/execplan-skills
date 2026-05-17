@@ -1,10 +1,10 @@
 ---
-name: handoff
+name: execplan-handoff
 description: Compact the current conversation into a temporary handoff document for another agent to pick up. Use when the current session may hit context limits, be paused, or be continued later.
 argument-hint: "What will the next session be used for?"
 ---
 
-# Handoff
+# ExecPlan Handoff
 
 Write a handoff document summarizing the current conversation so a fresh agent
 can continue the work.
@@ -36,7 +36,7 @@ Put these fields at the top:
 ```markdown
 # Handoff
 
-Working directory: <working directory at the moment of handoff skill activation>
+Working directory: <working directory at the moment of execplan-handoff skill activation>
 Created: <creation date and time>
 ```
 
@@ -69,7 +69,7 @@ Use only the sections that help the next session continue efficiently:
 ```markdown
 # Handoff
 
-Working directory: <working directory at the moment of handoff skill activation>
+Working directory: <working directory at the moment of execplan-handoff skill activation>
 Created: <creation date and time>
 
 ## Next Session Focus
