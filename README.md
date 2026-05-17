@@ -55,6 +55,27 @@ Restart Codex after installing or updating skills.
 Manual fallback: copy the desired directories from `skills/engineering/` into
 `${CODEX_HOME:-$HOME/.codex}/skills`.
 
+## Updating Installed Skills
+
+When this GitHub repository changes, reinstall the skills and restart Codex.
+
+If you installed from GitHub, rerun:
+
+```bash
+npx skills@latest add Smart-Outsourcing-Business-Consulting/execplan-skills --global --agent codex
+```
+
+If you installed from a local checkout, update the checkout first:
+
+```bash
+git pull --ff-only
+npx skills@latest add . --global --agent codex
+```
+
+If you installed manually, copy the updated `execplan-*` directories from
+`skills/engineering/` into `${CODEX_HOME:-$HOME/.codex}/skills`, replacing the
+old copies.
+
 ## Lifecycle Fit
 
 - ExecPlan authoring uses planning and clarification skills to create or revise
