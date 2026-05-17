@@ -80,10 +80,12 @@ Manual fallback: copy the desired directories from `skills/engineering/` into
   `skills/engineering/` skills without duplicating their source, and keep Codex
   as the only supported runtime until multi-agent support is explicitly added.
 
-Claude compatibility is a likely future direction, but it is not part of the
-current supported workflow. When that work happens, the repository should define
-which skills are shared across agents, how Claude-specific install metadata is
-kept in sync, and whether any behavior differs between Codex and Claude.
+- Claude compatibility is a likely future direction
+  ([#2](https://github.com/Smart-Outsourcing-Business-Consulting/execplan-skills/issues/2)),
+  but it is not part of the current supported workflow. When that work happens,
+  the repository should define which skills are shared across agents, how
+  Claude-specific install metadata is kept in sync, and whether any behavior
+  differs between Codex and Claude.
 
 ## Lifecycle Fit
 
