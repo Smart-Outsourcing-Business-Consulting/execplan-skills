@@ -32,8 +32,9 @@ and report drift. Do not reinterpret the task from those docs.
 
 ## Allowed Writes
 
-- Authoring: update `EXECPLAN.md`; update `CONTEXT.md` only for accepted stable
-  vocabulary; update or create ADRs only for accepted durable decisions.
+- Authoring: update `EXECPLAN.md`; update or lazily create `CONTEXT.md` only
+  for accepted stable vocabulary; update or create ADRs only for accepted
+  durable decisions.
 - Handoff preparation: do not use this skill except to report a newly found
   missing decision.
 - Implementation: do not change code or plan scope through this skill. If a
@@ -120,6 +121,29 @@ lists it under required behavior for this pass.
 
 Use `CONTEXT.md` for stable domain language, not implementation helper names,
 test names, or one-off task details.
+
+This skill is the producer of `CONTEXT.md` vocabulary during ExecPlan
+authoring. Consumer skills may read `CONTEXT.md` when it exists, but they
+should not create it as a side effect of implementation, handoff, diagnosis, or
+codebase mapping.
+
+Create `CONTEXT.md` lazily. If the repository has no `CONTEXT.md` or
+`CONTEXT-MAP.md`, create a root `CONTEXT.md` only when the grilling process
+resolves the first stable project-specific domain term that should outlive the
+current plan. Do not create an empty placeholder.
+
+Do not add `CONTEXT.md` entries for:
+
+- generic programming, framework, or testing terms
+- implementation helper, service, test, or fixture names
+- one-off plan decisions that belong only in `EXECPLAN.md`
+- optional future semantics that are not accepted vocabulary
+- scope boundaries whose only consequence is this plan's included or excluded
+  behavior
+
+For every accepted durable term, record both the term and its implementation
+consequence. Also summarize that consequence in `EXECPLAN.md` when the current
+plan depends on it.
 
 Use ADRs sparingly. All three should be true:
 
