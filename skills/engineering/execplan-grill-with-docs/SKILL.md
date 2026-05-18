@@ -26,8 +26,12 @@ and report drift. Do not reinterpret the task from those docs.
 
 - Always read repo-local instructions and the applicable `PLANS.md`.
 - Read the target `EXECPLAN.md` if it exists.
-- Read relevant `CONTEXT.md`, `docs/adr/*`, and `doc/discovery/*` when they
-  affect vocabulary, business rules, or prior decisions.
+- Read durable vocabulary when it affects vocabulary, business rules, or prior
+  decisions: if `CONTEXT-MAP.md` exists, read it first and use it to find the
+  relevant context file; else read root `CONTEXT.md` when present; else proceed
+  without durable context.
+- Read relevant `docs/adr/*` and `doc/discovery/*` when they affect
+  vocabulary, business rules, or prior decisions.
 - Inspect code when a question can be answered from the repository.
 
 ## Allowed Writes

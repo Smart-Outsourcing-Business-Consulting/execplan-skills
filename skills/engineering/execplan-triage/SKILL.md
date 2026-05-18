@@ -21,8 +21,12 @@ are planning inputs, not hidden implementation scope.
 
 - Always read repo-local instructions and the applicable `PLANS.md` if the
   request may enter the ExecPlan workflow.
-- Read relevant `CONTEXT.md`, `docs/adr/*`, and `doc/discovery/*` only enough
-  to classify the request.
+- Read durable vocabulary only enough to classify the request: if
+  `CONTEXT-MAP.md` exists, read it first and use it to find the relevant
+  context file; else read root `CONTEXT.md` when present; else proceed without
+  durable context.
+- Read relevant `docs/adr/*` and `doc/discovery/*` only enough to classify the
+  request.
 - Inspect code only enough to classify confidently.
 - Read an existing `EXECPLAN.md` when the request references one.
 

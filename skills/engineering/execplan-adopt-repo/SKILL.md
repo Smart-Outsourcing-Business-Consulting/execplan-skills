@@ -17,9 +17,9 @@ product implementation, issue-tracker setup, or a substitute for an accepted
 `AGENTS.md` should contain project context, safety rules, accepted checks, and
 repo-specific boundaries. It should not redefine the ExecPlan lifecycle.
 
-`CONTEXT.md`, `docs/adr/*`, and `doc/discovery/*` are durable background
-memory. Create or update them only when there is evidence-backed language or a
-durable decision that should outlive one task.
+`CONTEXT.md`, `CONTEXT-MAP.md`, `docs/adr/*`, and `doc/discovery/*` are
+durable background memory. Create or update them only when there is
+evidence-backed language or a durable decision that should outlive one task.
 
 ## Required Reads
 
@@ -29,8 +29,11 @@ durable decision that should outlive one task.
   runtime, checks, deployment, or safety constraints.
 - Inspect top-level directories and important module, command, model, route,
   job, schema, migration, test, and UI-surface names.
-- Read existing `CONTEXT.md`, `docs/adr/*`, `doc/discovery/*`, and
-  `docs/execplans/*` when present.
+- Read existing durable vocabulary when present: if `CONTEXT-MAP.md` exists,
+  read it first and use it to find relevant context files; else read root
+  `CONTEXT.md` when present.
+- Read existing `docs/adr/*`, `doc/discovery/*`, and `docs/execplans/*` when
+  present.
 - Do not run tests, installs, network commands, migrations, or application
   commands unless the user explicitly asks.
 
@@ -103,14 +106,9 @@ For each candidate term, record the evidence source mentally before writing.
 If the meaning is ambiguous or important, ask the user before making it
 durable.
 
-If repo convention requires `CONTEXT.md` to exist but no durable terms are
-evident, create a minimal file:
-
-```md
-# Context
-
-No stable domain terms have been recorded yet.
-```
+Do not create placeholder `CONTEXT.md` files. If a repo convention appears to
+require one but no stable terms are evident, report that explicitly and leave
+`CONTEXT.md` absent unless the user asks for a placeholder.
 
 ## Process
 
@@ -120,8 +118,8 @@ No stable domain terms have been recorded yet.
    checks, and durable vocabulary candidates.
 3. Draft or revise `AGENTS.md` so it is project-specific and defers lifecycle
    semantics to the shared ExecPlan harness.
-4. Decide whether `CONTEXT.md` should be absent, created minimally, or seeded
-   with evidence-backed terms.
+4. Decide whether `CONTEXT.md` should be absent or seeded with
+   evidence-backed terms.
 5. Decide whether `docs/adr/` or `docs/execplans/` should be created.
 6. Stop and ask before recording ambiguous business terms or durable
    decisions.
@@ -144,7 +142,7 @@ End with:
 - Files read
 - Files changed
 - `AGENTS.md` summary
-- `CONTEXT.md` action: absent, unchanged, created minimal, or seeded
+- `CONTEXT.md` action: absent, unchanged, or seeded
 - ADR or ExecPlan directories created, if any
 - Checks run, or not run with reason
 - Drift or blockers

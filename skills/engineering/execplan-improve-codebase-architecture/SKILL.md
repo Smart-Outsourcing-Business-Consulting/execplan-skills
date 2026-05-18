@@ -19,8 +19,11 @@ understand language and prior decisions, not to derive hidden requirements.
 ## Required Reads
 
 - Always read repo-local instructions and the applicable `PLANS.md`.
-- During discovery or authoring, read relevant `CONTEXT.md`, `docs/adr/*`, and
-  existing `EXECPLAN.md` if present.
+- During discovery or authoring, read durable vocabulary when relevant: if
+  `CONTEXT-MAP.md` exists, read it first and use it to find the relevant
+  context file; else read root `CONTEXT.md` when present; else proceed without
+  durable context.
+- Read relevant `docs/adr/*` and existing `EXECPLAN.md` if present.
 - During implementation, read `EXECPLAN.md` and `implementation-prompt.md`
   before reading broader code.
 - Inspect callers, callees, tests, and entrypoints for any proposed seam.
@@ -35,6 +38,26 @@ understand language and prior decisions, not to derive hidden requirements.
   update `progress.md`, `decision-log.md`, and
   `discoveries-retrospective.md`.
 - Never: broaden a refactor because additional friction was discovered.
+
+Architecture work may identify stable domain terms, but it does not create or
+update `CONTEXT.md` directly unless the user explicitly asks. Route unresolved
+or durable vocabulary through `execplan-grill-with-docs`.
+
+## Architecture Vocabulary
+
+Use these terms consistently:
+
+- `Module`: anything with an interface and implementation.
+- `Interface`: everything callers must know, including invariants, ordering,
+  error modes, configuration, and performance.
+- `Implementation`: what is inside the module.
+- `Seam`: where behavior can vary without editing that place.
+- `Adapter`: concrete thing satisfying an interface at a seam.
+- `Depth`: leverage at the interface.
+- `Locality`: change and verification concentrate in one place.
+
+Avoid vague substitutions like component, service, API, or boundary when the
+precise term is module, interface, seam, or adapter.
 
 ## ExecPlan Content Owned
 
@@ -52,16 +75,30 @@ For accepted architecture work, make sure `EXECPLAN.md` captures:
 
 ## Discovery Output
 
+During architecture discovery, do not design the new interface yet. First
+return candidates only, then ask which candidate to explore or author into
+`EXECPLAN.md`.
+
 When reviewing architecture, return numbered candidates with:
 
+- candidate name
 - files and surfaces
 - problem
-- proposed change
-- benefit
+- proposed direction
+- expected depth or locality benefit
 - behavior preservation risk
-- test impact
+- validation strategy
 - ADR or context conflicts
 - recommendation: accept into ExecPlan, defer, or reject
+
+Use these checks:
+
+- Deletion test: if deleting the module removes little complexity, it is
+  probably shallow.
+- One adapter means a hypothetical seam; two adapters means a real seam.
+- Test through the interface that callers use.
+- Prefer replacing shallow tests with deeper interface tests once coverage
+  exists.
 
 ## Implementation Rules
 

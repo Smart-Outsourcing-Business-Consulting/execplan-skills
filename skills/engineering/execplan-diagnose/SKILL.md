@@ -26,8 +26,11 @@ repository-local instructions, or explicit user instruction.
 - During authoring, read the target `EXECPLAN.md` if it exists.
 - During handoff or implementation, read `EXECPLAN.md` and
   `implementation-prompt.md`.
-- Read relevant `CONTEXT.md`, `docs/adr/*`, and `doc/discovery/*` only as
-  background for domain language and prior decisions.
+- Read durable vocabulary as background only: if `CONTEXT-MAP.md` exists, read
+  it first and use it to find the relevant context file; else read root
+  `CONTEXT.md` when present; else proceed without durable context.
+- Read `docs/adr/*` and `doc/discovery/*` only as background for domain
+  language and prior decisions.
 
 ## Allowed Writes
 
@@ -55,6 +58,19 @@ For bug or performance work, make sure `EXECPLAN.md` captures:
 - regression check strategy, or why no correct regression seam exists
 - stop conditions for missing access, missing artifacts, non-determinism, or
   unsafe checks
+
+Do not hypothesize from code reading alone. Before ranking causes, establish
+one of:
+
+- deterministic reproduction
+- high-repro failure loop
+- captured artifact, log, or trace that directly shows the failure
+- explicit user permission to proceed with a stated uncertainty
+
+If none exists, stop and ask for the missing artifact, access, or allowed
+check. A diagnosis ExecPlan is not ready for implementation handoff until the
+feedback loop and regression check are named, or their absence is recorded as a
+blocker.
 
 If no feedback loop can be built or authorized, record the blocker in
 `EXECPLAN.md` and do not create an implementation handoff.

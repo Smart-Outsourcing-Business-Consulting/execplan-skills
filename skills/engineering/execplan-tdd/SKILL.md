@@ -26,8 +26,12 @@ drift.
   behavior seams.
 - During implementation, read `EXECPLAN.md` and `implementation-prompt.md`
   before editing.
-- Read durable docs only for domain language and accepted decisions already
-  summarized in `EXECPLAN.md`.
+- Read durable vocabulary only for domain language already summarized in
+  `EXECPLAN.md`: if `CONTEXT-MAP.md` exists, read it first and use it to find
+  the relevant context file; else read root `CONTEXT.md` when present; else
+  proceed without durable context.
+- Read ADRs and discovery notes only for accepted decisions already summarized
+  in `EXECPLAN.md`.
 
 ## Allowed Writes
 
@@ -76,6 +80,10 @@ Avoid tests that:
 
 Mock only at system boundaries such as external APIs, time, randomness, file
 systems, or databases when a real boundary is impractical.
+
+When a real framework or runtime check is the accepted public seam, do not
+replace it with fake framework shims unless the ExecPlan explicitly allows pure
+helper testing for that slice.
 
 ## Slice Granularity
 

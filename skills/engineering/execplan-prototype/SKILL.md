@@ -21,8 +21,12 @@ specification and implementation source of truth.
 - Always read repo-local instructions and the applicable `PLANS.md`.
 - Read `EXECPLAN.md` before creating prototype files.
 - During implementation, also read `implementation-prompt.md`.
-- Read durable docs only to understand vocabulary or prior decisions relevant
-  to the prototype question.
+- Read durable vocabulary only to understand vocabulary relevant to the
+  prototype question: if `CONTEXT-MAP.md` exists, read it first and use it to
+  find the relevant context file; else read root `CONTEXT.md` when present;
+  else proceed without durable context.
+- Read ADRs and discovery notes only for prior decisions relevant to the
+  prototype question.
 
 ## Allowed Writes
 
@@ -34,6 +38,18 @@ specification and implementation source of truth.
   `discoveries-retrospective.md` with the result.
 - Never: let prototype behavior become production behavior without an accepted
   plan update.
+
+Prototype files must be visibly throwaway:
+
+- place them only in the accepted prototype location
+- name files, routes, scripts, or folders with `prototype`, `spike`, or the
+  accepted throwaway folder
+- avoid production abstractions, persistence, migrations, auth, observability,
+  and styling polish
+- do not add tests unless the prototype question is specifically about test
+  behavior
+- capture the learned answer, then delete or absorb according to the cleanup
+  rule
 
 ## ExecPlan Content Owned
 

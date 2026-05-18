@@ -25,8 +25,11 @@ from them.
   existing `implementation-prompt.md`.
 - During implementation, read `EXECPLAN.md` and `implementation-prompt.md`
   before using the map to fill orientation gaps.
-- Read durable docs only for vocabulary and prior decisions relevant to the
-  map.
+- Read durable vocabulary only for terms relevant to the map: if
+  `CONTEXT-MAP.md` exists, read it first and use it to find the relevant
+  context file; else read root `CONTEXT.md` when present; else proceed without
+  durable context.
+- Read ADRs and discovery notes only for prior decisions relevant to the map.
 
 ## Allowed Writes
 

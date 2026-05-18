@@ -49,11 +49,16 @@ Reference them by path or URL instead.
 If an ExecPlan exists, be ExecPlan-aware:
 
 - reference `docs/execplans/<plan-name>/EXECPLAN.md` for accepted scope
-- reference `CONTEXT.md` and `docs/adr/*` only as durable planning memory
+- reference durable vocabulary only as planning memory: if `CONTEXT-MAP.md`
+  exists, read it first and use it to find the relevant context file; else read
+  root `CONTEXT.md` when present; else proceed without durable context
+- reference `docs/adr/*` only as durable planning memory
 - reference `progress.md`, `decision-log.md`, and
   `discoveries-retrospective.md` if they already contain relevant continuity
   details
 - do not convert those files into hidden requirements
+- do not create `CONTEXT.md`; `execplan-grill-with-docs` is the normal producer
+  of durable vocabulary during authoring
 - do not update ExecPlan lifecycle files unless the user separately asked for
   that lifecycle action
 
