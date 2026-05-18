@@ -59,6 +59,14 @@ durable decision that should outlive one task.
   boundaries
 - statement that substantial work uses `docs/execplans/<plan-name>/`
 - statement that lifecycle rules come from the shared ExecPlan harness
+- references to domain-specific research or testing skills when local tooling,
+  source trees, runtime commands, or framework conventions are too long for
+  `AGENTS.md`
+
+Prefer skills over long `AGENTS.md` passages for reusable local guidance such
+as framework source lookup, local runtime setup, test-tag conventions, or
+version-specific research workflows. `AGENTS.md` should name when to use those
+skills and keep only the repo-specific boundaries.
 
 `CONTEXT.md` should be a durable domain glossary, not a repo summary.
 

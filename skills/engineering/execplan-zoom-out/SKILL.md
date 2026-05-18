@@ -47,11 +47,37 @@ During authoring, the map may inform these `EXECPLAN.md` areas:
 - implementation strategy
 - expected files and entrypoints
 - accepted seams or boundaries
+- dirty-worktree exclusions and "never touch/stage" paths
 - verification policy
 - drift rules
 
 Current repository state that may change before implementation belongs in
 `implementation-prompt.md`, not stable `EXECPLAN.md` scope.
+
+During handoff preparation, put dirty-worktree guardrails near the top of
+`implementation-prompt.md`:
+
+- exact files the worker may edit or stage
+- exact files and directories the worker must not touch or stage
+- unrelated tracked diffs to preserve
+- unrelated untracked files to ignore
+- checks allowed without permission and checks requiring permission
+
+Do not rely on a worker rereading scattered status notes to rediscover these
+boundaries.
+
+For behavior work, the handoff prompt must also prevent broad one-pass
+implementation:
+
+- say "do not implement the whole plan in one pass"
+- name the next accepted slice or slice group
+- require the TDD loop for that slice: red check, green check, lifecycle
+  update, then stop before the next slice unless the user explicitly says to
+  continue
+- allow grouped red failures inside the slice when the failures belong to the
+  same accepted behavior group
+- require implementation workers to report if red-first sequencing was not
+  preserved
 
 ## What To Produce
 
@@ -64,6 +90,7 @@ Give a concise map of:
 - stable seams and boundaries
 - likely affected files or components
 - current-state facts for `implementation-prompt.md`
+- "never touch/stage" dirty-worktree guardrails when preparing handoff
 - contradictions between code, durable docs, and the active ExecPlan
 
 ## Stop Conditions

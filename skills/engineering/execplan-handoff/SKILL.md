@@ -57,6 +57,17 @@ If an ExecPlan exists, be ExecPlan-aware:
 - do not update ExecPlan lifecycle files unless the user separately asked for
   that lifecycle action
 
+When summarizing implementation continuity, preserve scope language:
+
+- required behavior in this pass
+- explicitly deferred behavior
+- discovered optional future work
+- blockers
+- out-of-scope work
+
+Do not summarize optional future semantics as "remaining gaps" or automatic
+follow-up work unless the accepted ExecPlan says they are required.
+
 Suggest the skills to be used, if any, by the next session.
 
 If the user passed arguments, treat them as a description of what the next

@@ -8,6 +8,9 @@ description: ExecPlan-aware grilling for ambiguous business intent, overloaded d
 Use this skill to clarify intent and documentation without letting scattered
 docs become hidden implementation scope.
 
+This is an adversarial readiness check. Its job is to try to disprove that the
+plan is ready, not to make the plan look ready.
+
 ## Core Invariant
 
 `docs/execplans/<plan-name>/EXECPLAN.md` is the accepted executable
@@ -45,22 +48,73 @@ Make sure every resolved implementation-relevant point is represented in
 
 - business objective
 - accepted scope and non-goals
+- what this plan owns, and what adjacent plans own
+- what is required in this pass
+- what is explicitly deferred
+- what is only a design note or possible later semantic
 - domain terms with actionable consequences
+- mechanism-vs-catalogue boundaries, when one plan provides reusable mechanism
+  and another plan provides concrete operational cases
+- interface contracts and architecture boundaries
 - edge cases and inverse or unapply behavior
 - durable-doc consequences
 - verification expectations
 - stop conditions and blocking questions
 
+## Mandatory Adversarial Inventory
+
+Before declaring "no blocking questions", build an inventory of material
+business rules, naming rules, scope boundaries, lifecycle rules, interface
+contracts, verification claims, and durable-doc consequences.
+
+Classify every item in a table:
+
+```md
+| Rule or decision | Evidence source | Explicit or inferred? | Needs user decision? | Recommended answer | Consequence if wrong |
+| --- | --- | --- | --- | --- | --- |
+```
+
+Use `Explicit or inferred?` to prevent guesses from becoming accepted rules.
+Use `Needs user decision?` to prevent silently resolving business semantics.
+Use `Consequence if wrong` to force failure-mode thinking.
+
+The agent must actively try to disprove readiness. It may only say "no
+blocking questions" after every material business rule, naming rule, scope
+boundary, lifecycle rule, and interface contract has been classified as
+explicitly accepted, evidence-answerable, non-blocking, or intentionally
+deferred.
+
+If a rule is inferred and implementation would rely on it, it is a blocking
+question unless the user explicitly accepts it or it is rewritten as deferred
+non-scope.
+
+## Readiness Checks
+
+Before handoff or implementation readiness, verify that `EXECPLAN.md` separates:
+
+- required behavior for this pass
+- explicitly deferred behavior
+- optional design notes and possible future semantics
+- owned mechanism versus concrete catalogue, if applicable
+- adjacent-plan ownership and non-goals
+- lifecycle terms such as implemented, deferred, optional future work, blocked,
+  and out of scope
+
+Do not let "resolve when", "later", "eventually", "should", "may", or
+"future" language become implementation scope unless the ExecPlan explicitly
+lists it under required behavior for this pass.
+
 ## Process
 
 1. Identify the ambiguity.
 2. Inspect code or durable docs before asking the user.
-3. Ask one focused question at a time when judgment is needed.
-4. Include a recommended answer with the question.
-5. Write each resolved implementation rule into `EXECPLAN.md`.
-6. Write durable vocabulary to `CONTEXT.md` only when it should outlive this
+3. Build the mandatory adversarial inventory table.
+4. Ask one focused question at a time when judgment is needed.
+5. Include a recommended answer with the question.
+6. Write each resolved implementation rule into `EXECPLAN.md`.
+7. Write durable vocabulary to `CONTEXT.md` only when it should outlive this
    task.
-7. Write ADRs only for hard-to-reverse, surprising tradeoff decisions.
+8. Write ADRs only for hard-to-reverse, surprising tradeoff decisions.
 
 ## Durable Doc Rules
 
@@ -84,6 +138,10 @@ Stop when:
 - durable docs conflict with the accepted plan
 - the user rejects a scope boundary required for a coherent plan
 - the plan would require hidden assumptions to become executable
+- the plan mixes required behavior with optional future semantics in a way an
+  implementation worker could treat as required scope
+- the plan fails to distinguish mechanism ownership from catalogue ownership
+  where that distinction affects implementation
 
 ## Output Template
 
@@ -92,7 +150,8 @@ End with:
 - Phase assumed
 - Files read
 - Files changed
-- Questions resolved
+- Adversarial inventory table and classifications
+- Questions asked and resolved
 - `EXECPLAN.md` updates made or needed
 - Durable doc updates made or needed
 - Drift or blockers

@@ -64,6 +64,9 @@ Categories:
 
 - Bug or regression without repro: `needs-diagnosis`.
 - Fuzzy business behavior: `needs-grilling`.
+- Mixed mechanism and catalogue ownership: `needs-grilling`.
+- A request that might turn optional future semantics into required work:
+  `needs-grilling`.
 - Coupling, seams, locality, or testability concern: `needs-architecture-review`.
 - Narrow logic, state, UI, or design uncertainty: `needs-prototype`.
 - Accepted plan without fresh current-state snapshot: `ready-for-handoff`.
@@ -75,6 +78,15 @@ Categories:
 When triage reaches `ready-for-execplan`, identify the plan path and the
 minimum accepted scope to author. Do not invent detailed implementation steps
 unless the user asked you to author the ExecPlan.
+
+Also identify whether the task is:
+
+- a reusable mechanism
+- a concrete catalogue of cases/events/rules
+- both, requiring an explicit boundary
+
+If that boundary is unclear, route to `needs-grilling` before authoring or
+handoff.
 
 ## Out Of Scope
 

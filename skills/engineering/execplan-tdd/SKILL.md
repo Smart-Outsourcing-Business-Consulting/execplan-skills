@@ -45,6 +45,9 @@ Make sure `EXECPLAN.md` identifies:
 - public behavior to verify
 - public interfaces or user-visible flows that expose behavior
 - behavior slices and priority order
+- what is required in this pass
+- what is explicitly deferred
+- what is only a design note or possible later semantic
 - critical paths and edge cases
 - checks allowed without permission
 - checks requiring explicit permission
@@ -53,6 +56,11 @@ Make sure `EXECPLAN.md` identifies:
 
 If no viable verification strategy exists, stop and ask to revise the ExecPlan
 before implementation.
+
+For behavior work, `implementation-prompt.md` must name the next slice or
+slice group and require: red check, green check, lifecycle update, and stop
+before the next slice unless the user explicitly says to continue. A broad
+"implement this plan" prompt is not sufficient for behavior work.
 
 ## Test Philosophy
 
@@ -69,23 +77,81 @@ Avoid tests that:
 Mock only at system boundaries such as external APIs, time, randomness, file
 systems, or databases when a real boundary is impractical.
 
+## Slice Granularity
+
+Use the named behavior slices in `EXECPLAN.md`. A slice is a coherent behavior
+group, not one enum value, signal name, branch, field, or tiny helper method.
+
+Do not split one accepted behavior group into separate stops for every small
+case unless the ExecPlan or user explicitly asks for that.
+
+### Self-Contained Example
+
+If `EXECPLAN.md` says:
+
+- Slice 2: Download selection
+- Accepted behavior: emit signals for no candidate source, outside window,
+  generation imminent, active attempt, retry exhausted, expired before
+  download, and malformed candidate payload
+
+Then the TDD slice is **Download selection**, not seven separate slices.
+
+A good loop is:
+
+1. Add focused tests for several representative download-selection outcomes.
+2. Confirm the grouped red run fails for the expected missing behavior.
+3. Implement the minimal source hooks for the accepted download-selection
+   outcomes.
+4. Run the same focused check.
+5. Fix edge cases discovered inside that same slice, such as inventory sources
+   affecting no-candidate-source.
+6. Stop before the next ExecPlan slice, such as Dispatch.
+
+It is acceptable for a grouped slice red run to have multiple expected
+failures. Red/green applies to the accepted behavior group, not necessarily to
+one assertion, one signal, or one branch.
+
+Split smaller only when:
+
+- the behavior group is too large to verify in one focused check
+- failures cannot be understood together
+- implementation touches unrelated ownership areas
+- the ExecPlan explicitly subdivides the group
+- the user asks to stop after each individual behavior
+
 ## Implementation Workflow
 
 Use vertical slices. Do not write all tests first and all implementation later.
 
 For each behavior slice:
 
-1. Pick one accepted behavior from `EXECPLAN.md`.
-2. Write one failing test or equivalent allowed check.
+1. Pick the next accepted behavior group from `EXECPLAN.md`.
+2. Write one failing focused check or a grouped focused check for that slice.
 3. Confirm it fails for the expected reason.
 4. Write the smallest implementation that makes it pass.
 5. Run the focused check.
 6. Update `progress.md`.
-7. Repeat only for the next accepted behavior.
+7. Fix edge cases discovered inside the same slice when they belong to the
+   same behavior group and ownership area.
+8. Stop before the next accepted slice unless the user explicitly asks you to
+   continue.
 
 After green, refactor only while checks are passing. Record material test seam
 decisions in `decision-log.md` and testability discoveries in
 `discoveries-retrospective.md`.
+
+## Lifecycle Vocabulary
+
+Use precise lifecycle labels:
+
+- `Implemented`: accepted behavior completed in this pass.
+- `Deferred by accepted scope`: explicitly out of this pass.
+- `Discovered optional future work`: useful later context, not required scope.
+- `Blocked`: user decision, permission, or missing seam prevents completion.
+- `Out of scope`: must not be implemented in this pass.
+
+Do not call optional future semantics "remaining gaps" unless the active
+ExecPlan explicitly makes them required for completion.
 
 ## Stop Conditions
 
