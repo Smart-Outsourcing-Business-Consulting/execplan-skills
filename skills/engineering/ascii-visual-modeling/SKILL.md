@@ -44,8 +44,15 @@ already clearer as a sentence or table.
   accepted.
 - Pair the diagram with a short explanation of what it proves, what it omits,
   and any remaining question.
+- For source-backed explanations, let the diagram model relationships and let
+  code/config/log snippets provide evidence. Prefer references such as `[A]`,
+  `[B]`, and `[C]` inside the diagram when real source text would make it long
+  or repetitive.
 - Do not let a diagram replace normative text, acceptance criteria, test
   expectations, or drift/blocker rules.
+- Separate the jobs of each section when an explanation includes source text:
+  `diagram = relationships`, `snippets = evidence`, `prose = interpretation`,
+  and `commands = verification`.
 - When the plan or code changes, update or remove stale diagrams.
 
 ## Choosing A Model
@@ -87,6 +94,48 @@ incoming request
   -> store result
   -> notify caller
 ```
+
+### Source-Backed Flow
+
+Use when the user asks how code lines, configuration files, environment values,
+logs, or runtime objects interact. Keep the diagram reference-based and show
+the exact source evidence below it.
+
+```text
+[A] source of input
+        |
+        | passes value to
+        v
+[B] adapter / parser / loader
+        |
+        | normalizes into
+        v
+[C] runtime object / state
+        |
+        | consumed by
+        v
+[D] behavior
+```
+
+Then key minimal snippets to the references:
+
+```python
+# [A] config.py
+RAW_TIMEOUT = os.getenv("TIMEOUT")
+
+# [B] settings.py
+timeout = int(RAW_TIMEOUT)
+
+# [C] client.py
+client = Client(timeout=settings.timeout)
+
+# [D] worker.py
+client.fetch()
+```
+
+The prose should state the conclusion and explain what the source proves. Do
+not duplicate the same values in the diagram, snippets, and prose unless that
+duplication is necessary to avoid ambiguity.
 
 ### State Machine
 
@@ -136,6 +185,35 @@ Use when explaining why a failure does or does not cross a boundary.
                                          before replay is allowed
 ```
 
+## Readability And Staged Delivery
+
+Prefer a single concise response when it can fit comfortably. Treat a visual
+explanation as at risk of becoming unreadable when several of these are true:
+
+- the diagram is more than about 8 to 12 lines
+- the response needs multiple code, YAML, env, log, or command blocks
+- the same variable, path, method, or function appears in prose, diagram, and
+  snippets
+- the reader must compare source text that is far apart vertically
+- the answer combines "how it works", exact source evidence, and debug commands
+- the diagram contains real source values instead of short references
+- the conclusion would appear only after a long scroll
+
+When the source-backed format would still be too dense, use staged delivery for
+explanatory responses:
+
+1. Give the direct conclusion in piece 1.
+2. Say how many pieces there are and what each piece covers.
+3. Give piece 1 only and ask for a simple continuation cue such as `next`.
+4. Make every piece useful on its own; do not make piece 1 only background.
+5. Do not split urgent warnings, blockers, exact commands, or required fixes
+   across pieces.
+
+Staged delivery is for explanations, diagnosis, onboarding, and architecture
+flow. Do not use it to pause active implementation, testing, or verification
+unless the user explicitly asked to review the explanation before work
+continues.
+
 ## ExecPlan And Spec Use
 
 When writing an ExecPlan or spec:
@@ -154,8 +232,13 @@ When writing an ExecPlan or spec:
 Before finalizing, check:
 
 - Can the reader explain the main boundary or flow from the diagram alone?
+- Is the diagram modeling relationships instead of duplicating source content?
+- Are exact code, config, log, or command snippets keyed to references when the
+  explanation depends on source evidence?
 - Are all labels stable domain terms rather than vague words like "stuff" or
   "magic"?
 - Are uncertain parts marked instead of implied?
 - Does the surrounding text say what the diagram means for implementation?
+- If the answer is dense, should it use staged delivery with the conclusion in
+  piece 1?
 - Would the diagram still fit and read correctly in a terminal?
