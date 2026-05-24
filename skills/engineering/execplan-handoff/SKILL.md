@@ -17,9 +17,17 @@ Store handoff files under:
 
 Create that directory if it does not exist.
 
-The handoff file name must be:
+The handoff file name must always include the session identifier and a
+descriptive handoff name or focus:
 
-`handoff-<session-id>.md`
+`<session-id>-<slugified-description>.md`
+
+Examples:
+
+- session id: `019e4d4a-ff58-7023-9e19-e24c55783792`
+- description: `check compatibility windows rsync`
+- filename:
+  `019e4d4a-ff58-7023-9e19-e24c55783792-check-compatibility-windows-rsync.md`
 
 If the active session identifier can be determined from the prompt, UI text,
 screenshot, user-provided text, environment, or other visible context, use it.
@@ -27,7 +35,25 @@ screenshot, user-provided text, environment, or other visible context, use it.
 If the active session identifier cannot be determined automatically, ask the
 user for it before continuing. Do not invent one.
 
-Before writing, read the target handoff file if it already exists.
+If the descriptive handoff name or focus cannot be determined from the skill
+arguments, prompt, user-provided text, or other visible context, ask the user
+for it before continuing. Do not invent one.
+
+Slugify the descriptive name or focus before constructing the filename:
+
+- lowercase the description
+- replace whitespace and underscores with hyphens
+- remove characters unsafe for filenames
+- reject or remove path separators
+- collapse repeated hyphens
+- trim leading and trailing hyphens
+
+Never write outside `/tmp/codex-handoffs/`. Treat any path separators in the
+session identifier or slugified description as invalid filename content, not as
+directories.
+
+Before writing, compute the target file path under `/tmp/codex-handoffs/`,
+check whether that exact file already exists, and read it if it does.
 
 ## Document Header
 
