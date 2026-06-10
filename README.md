@@ -97,13 +97,20 @@ After any update path, make sure duplicate ExecPlan copies do not exist under
 - ExecPlan authoring uses planning and clarification skills to create or revise
   `EXECPLAN.md`.
 - Handoff preparation refreshes only `implementation-prompt.md` after the
-  ExecPlan is accepted and unblocked.
+  ExecPlan is accepted and unblocked, following `PLANS.md`.
 - Implementation changes code only within accepted ExecPlan scope and updates
   `progress.md`, `decision-log.md`, and `discoveries-retrospective.md`.
 
 The `execplan-handoff` skill is separate from ExecPlan lifecycle handoff
 preparation: it writes temporary `/tmp/codex-handoffs/` conversation handoffs
-for context-limit, pause, or later-continuation cases.
+for context-limit, pause, or later-continuation cases. It does not create or
+refresh `implementation-prompt.md`.
+
+Use `execplan-zoom-out` during handoff preparation only when volatile
+repository-state facts are needed, such as dirty worktree guardrails, stale or
+missing `implementation-prompt.md`, changed files since authoring, unclear
+entrypoints, or suspected drift. Do not invoke it merely because an
+implementation prompt is being prepared.
 
 If durable docs, repository state, or implementation discoveries contradict or
 expand the accepted ExecPlan, the agent must stop and report drift instead of

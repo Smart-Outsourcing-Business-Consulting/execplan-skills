@@ -1,6 +1,6 @@
 ---
 name: execplan-handoff
-description: Compact the current conversation into a temporary handoff document for another agent to pick up. Use when the current session may hit context limits, be paused, or be continued later.
+description: Use only when explicitly creating a temporary conversation handoff file under /tmp/codex-handoffs/ for context-limit, pause, or later-continuation. Do not use for ExecPlan lifecycle handoff preparation or implementation-prompt.md refresh.
 argument-hint: "What will the next session be used for?"
 ---
 
@@ -8,6 +8,11 @@ argument-hint: "What will the next session be used for?"
 
 Write a handoff document summarizing the current conversation so a fresh agent
 can continue the work.
+
+This skill is not for ExecPlan lifecycle handoff preparation. It does not create
+or refresh `docs/execplans/<plan-name>/implementation-prompt.md`. For lifecycle
+handoff preparation, use `PLANS.md`; use `execplan-zoom-out` only when volatile
+current-state mapping is needed.
 
 ## Handoff Location
 

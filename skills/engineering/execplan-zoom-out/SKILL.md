@@ -1,12 +1,27 @@
 ---
 name: execplan-zoom-out
-description: ExecPlan-aware codebase mapping for unfamiliar modules, affected files, callers, data flow, current-state handoff, stale implementation prompts, and drift risks. Use during authoring to inform EXECPLAN.md, during handoff to refresh implementation-prompt.md, or during implementation to resolve orientation gaps without creating new scope.
+description: ExecPlan-aware current-state mapping for stale or missing implementation prompts, dirty-worktree guardrails, unfamiliar affected files, or suspected drift. Use during handoff only when implementation-prompt.md needs repository-state facts that are not already captured, or when the working tree may have changed. Do not use merely because an accepted EXECPLAN.md is being implemented.
 ---
 
 # ExecPlan Zoom Out
 
-Use this skill to go up one layer of abstraction before authoring, preparing,
-or implementing an ExecPlan.
+Use this skill to map current repository state when authoring needs affected
+surfaces, handoff preparation needs volatile state facts, or implementation
+needs orientation inside accepted scope.
+
+## When Not To Use
+
+Do not use this skill to re-derive accepted scope from an already complete
+`EXECPLAN.md`.
+
+During handoff preparation, use this skill only to capture volatile
+current-state facts such as dirty worktree guardrails, stale or missing
+`implementation-prompt.md`, changed files since authoring, unclear entrypoints,
+or suspected drift.
+
+If `EXECPLAN.md` is accepted, `implementation-prompt.md` is current, the next
+slice is clear, and no repository-state drift is suspected, skip this skill and
+proceed with the lifecycle rules in `PLANS.md`.
 
 ## Core Invariant
 
